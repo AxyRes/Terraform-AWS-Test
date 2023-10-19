@@ -21,18 +21,18 @@ The project is organized into the following sections:
     - Edit some variables for all file `main.tf`, `variables.tf`, and `outputs.tf` to match your infrastructure requirements.
 2. **Initialize Terraform**:
     - Go to Directory that have main.tf is the same level with this file README.md
-    Run the following command to initialize Terraform:
+    - Run the following command to initialize Terraform:
         ```sh
-        terraform init ```
-    Review and Plan:
+        terraform init
+    - Review and Plan:
         ```sh 
-        terraform plan```
-    Apply Configuration:
+        terraform plan
+    - Apply Configuration:
         ```sh 
-        terraform apply```
-    Destroy Resources:
+        terraform apply
+    - Destroy Resources:
         ```sh 
-        terraform destroy```
+        terraform destroy
 ## LICENSE
 
 This project is licensed under the MIT License - see the LICENSE file for details.
