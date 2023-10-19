@@ -10,8 +10,16 @@ variable "instance_name" {
   default = "MISR_TEST"
 }
 
+variable "instance_key" {
+  default = "MISR_KEY"
+}
+
 variable "ami" {
   default = "ami-0556fb70e2e8f34b7"
+}
+
+variable "myip" {
+  default = "171.246.210.79"
 }
 
 variable "vpc_cidr_block" {

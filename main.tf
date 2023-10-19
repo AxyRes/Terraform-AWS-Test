@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "ap-southeast-1"
+}
+
 terraform {
   required_providers {
     aws = {
@@ -24,18 +28,14 @@ module "custom-vpc" {
 
 module "custom_security_group" {
   source     = "./modules/custom-security-group"
-  allowed_ip = "171.246.210.79"
+  allowed_ip = var.myip
   vpc_id     = module.custom-vpc.vpc_id # Replace with your VPC ID
 }
 
-provider "aws" {
-  region = "ap-southeast-1"
-}
-
-resource "aws_instance" "MISR_1" {
+resource "aws_instance" "terraform_instance_1" {
   ami                    = var.ami           # Amazon Linux 2 AMI ID
   instance_type          = var.instance_type # Instance type (small, free tier eligible)
-  key_name               = "MISR_KEY"        # Your SSH key pair name (replace with your own)
+  key_name               = var.instance_key       # Your SSH key pair name (replace with your own)
   subnet_id              = module.custom-vpc.public_subnet_ids
   security_groups        = [module.custom-security-group.security_group_id]
   associate_public_ip_address = true
@@ -44,10 +44,10 @@ resource "aws_instance" "MISR_1" {
   }
 }
 
-resource "aws_instance" "MISR_2" {
+resource "aws_instance" "terraform_instance_2" {
   ami                    = var.ami           # Amazon Linux 2 AMI ID
   instance_type          = var.instance_type # Instance type (small, free tier eligible)
-  key_name               = "MISR_KEY"        # Your SSH key pair name (replace with your own)
+  key_name               = var.instance_key       # Your SSH key pair name (replace with your own)
   subnet_id              = module.custom-vpc.public_subnet_ids
   security_groups        = [module.custom-security-group.security_group_id]
   associate_public_ip_address = true
