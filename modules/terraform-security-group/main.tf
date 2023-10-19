@@ -1,6 +1,6 @@
 resource "aws_security_group" "allow_all" {
   name        = "allow-all-from-${var.allowed_ip}"
-  vpc_id      = module.custom-vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   // Ingress rule to allow all incoming traffic from the specified IP
   ingress {

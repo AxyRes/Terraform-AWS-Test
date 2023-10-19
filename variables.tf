@@ -19,7 +19,7 @@ variable "ami" {
 }
 
 variable "myip" {
-  default = "171.246.210.79"
+  default = "171.246.210.79/32"
 }
 
 variable "vpc_cidr_block" {

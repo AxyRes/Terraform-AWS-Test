@@ -27,9 +27,9 @@ module "custom-vpc" {
 }
 
 module "custom_security_group" {
-  source     = "./modules/custom-security-group"
+  source     = "./modules/terraform-security-group"
   allowed_ip = var.myip
-  vpc_id     = module.custom-vpc.vpc_id # Replace with your VPC ID
+  vpc_id     = module.custom-vpc.vpc_id
 }
 
 #module "custom-alb" {
@@ -48,7 +48,7 @@ resource "aws_instance" "terraform_instance_1" {
   instance_type          = var.instance_type # Instance type (small, free tier eligible)
   key_name               = var.instance_key       # Your SSH key pair name (replace with your own)
   subnet_id              = module.custom-vpc.public_subnet_ids
-  security_groups        = [module.custom-security-group.security_group_id]
+  security_groups        = [module.custom_security_group.security_group_id]
   associate_public_ip_address = true
   tags = {
     Name = "${var.instance_name}_1_PROXY"
@@ -60,7 +60,7 @@ resource "aws_instance" "terraform_instance_2" {
   instance_type          = var.instance_type # Instance type (small, free tier eligible)
   key_name               = var.instance_key       # Your SSH key pair name (replace with your own)
   subnet_id              = module.custom-vpc.public_subnet_ids
-  security_groups        = [module.custom-security-group.security_group_id]
+  security_groups        = [module.custom_security_group.security_group_id]
   associate_public_ip_address = true
   tags = {
     Name = "${var.instance_name}_2_APPLICATION"
