@@ -32,6 +32,17 @@ module "custom_security_group" {
   vpc_id     = module.custom-vpc.vpc_id # Replace with your VPC ID
 }
 
+#module "custom-alb" {
+#  source = "./modules/terraform-loadbalancer"
+
+#  alb_name                = "my-application-lb"
+#  internal                = false
+#  subnet_ids              = module.custom-vpc.public_subnet_ids
+#  security_group_ids      = [module.custom-security-group.security_group_id]
+#  enable_deletion_protection = false
+#  enable_http2            = true
+#}
+
 resource "aws_instance" "terraform_instance_1" {
   ami                    = var.ami           # Amazon Linux 2 AMI ID
   instance_type          = var.instance_type # Instance type (small, free tier eligible)
@@ -65,5 +76,18 @@ resource "aws_instance" "terraform_instance_2" {
 #  associate_public_ip_address = true
 #  tags = {
 #    Name = "${var.instance_name}_3_DATABASE"
+#  }
+#}
+
+#resource "aws_lb_listener" "load_balancer" {
+#  load_balancer_arn = module.my_alb.alb_arn
+#  port             = 80
+#  protocol         = "HTTP"
+#  default_action {
+#    type             = "fixed-response"
+#    fixed_response {
+#      content_type = "text/plain"
+#      status_code  = "200"
+#    }
 #  }
 #}
